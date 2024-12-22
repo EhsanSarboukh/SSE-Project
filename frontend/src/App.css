@@ -1,0 +1,535 @@
+.App {
+  text-align: center;
+  align-items: center;
+  font-family: "Noto Sans Hebrew", sans-serif;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body {
+  font-family: "Varela Round", sans-serif;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 20px;
+}
+
+.controls label,
+.controls select {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.item-grid {
+  width: 60vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2px; /* Horizontal gap */
+  row-gap: 5px; /* Vertical gap */
+  padding: 10px;
+  justify-content: center;
+  margin: auto;
+}
+
+.item-card {
+  width: 80%;
+  border: 1px solid #ddd;
+  padding: 5px;
+  position: relative;
+  text-align: center;
+  transform: scale(0.9);
+}
+
+.item-image {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.item-image img {
+  width: 200px;
+  height: 200px;
+}
+
+.item-actions {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  gap: 10px;
+}
+
+.item-card:hover .item-actions {
+  display: flex;
+}
+
+.item-actions .modify,
+.item-actions .remove {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 50%;
+}
+
+/* Ensure consistent button sizes */
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.pagination-button {
+  padding: 10px;
+  margin-bottom: 0px;
+  width: 5%;
+}
+
+.pagination input {
+  width: 50px;
+  text-align: center;
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal.fade-in {
+  opacity: 1;
+  visibility: visible; /* Make visible immediately with fade-in */
+}
+
+/* Modal content styling */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3vh;
+}
+
+/* Label and Input Spacing */
+.modal-content label {
+  margin-bottom: 5px;
+}
+
+.modal input {
+  padding: 0.5vh;
+  margin: 1vh;
+  width: 90%;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+/* Popup.css */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* App.css */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Image buttons hover */
+.relative img {
+  transition: all 0.3s ease-in-out;
+}
+
+.relative:hover img {
+  transform: scale(1.02); /* Slight zoom-in on hover */
+}
+
+/* Pagination controls */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  gap: 2.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.pagination-button {
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 1.3vw;
+  width: 11vw;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.pagination-button.left {
+  left: 2vw;
+}
+
+.pagination-button.right {
+  right: 2vw;
+}
+
+.pagination-icon {
+  width: 2vw;
+  height: 4vh;
+}
+
+.pagination-info {
+  font-size: 1.3vw;
+  margin: 0 1rem;
+}
+
+/* Media Query for Small Screens (Phones) */
+@media (max-width: 768px) {
+  .pagination-button {
+    font-size: 3vh; /* Scale buttons for smaller screens */
+  }
+
+  .pagination-icon {
+    width: 4vh; /* Larger icons for better visibility */
+    height: 4vh;
+  }
+
+  .pagination-info {
+    font-size: 3vh; /* Adjust text size for mobile */
+  }
+
+  .pagination-container {
+    flex-direction: row; /* Stack items vertically */
+    gap: 20vw; /* Reduce gap for mobile */
+  }
+
+  .pagination-button {
+    position: static; /* Remove absolute positioning */
+  }
+}
+
+/* Items grid display */
+/* General Grid Styling */
+.custom-grid {
+  row-gap: 2px;
+}
+
+.custom-card {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  padding: 1rem;
+  background-color: #ffffff;
+  margin: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  text-align: right;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+}
+
+/* Image Styling */
+.custom-image-container {
+  position: relative;
+  width: 15vw; /* Set square size using vw */
+  height: 15vw; /* Ensure it's a square */
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  justify-content: center;
+  overflow: hidden; /* Prevent image overflow */
+  border-radius: 15px; /* Optional for rounded corners */
+}
+
+.custom-image {
+  max-width: 100%;
+  max-height: 100%;
+  justify-self: center;
+  object-fit: contain; /* Ensures the entire image is visible within the square */
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Button Styling */
+.custom-button {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.custom-button:hover {
+  transform: scale(1.1);
+}
+
+.add-button {
+  background-color: #6b7280; /* Gray */
+}
+
+.add-button:hover {
+  background-color: #4b5563;
+}
+
+.decrement-button {
+  background-color: #ef4444; /* Red */
+}
+
+.decrement-button:hover {
+  background-color: #dc2626;
+}
+
+.increment-button {
+  background-color: #10b981; /* Green */
+}
+
+.increment-button:hover {
+  background-color: #059669;
+}
+
+/* Input Styling */
+.custom-input {
+  width: 3rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+/* Label Styling */
+.custom-label {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  text-align: right;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .custom-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .custom-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .custom-button {
+    font-size: 0.9rem;
+  }
+
+  .custom-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .custom-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .custom-image-container {
+    width: 20vw; /* Adjust square size for smaller screens */
+    height: 20vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-image-container {
+    width: 50vw; /* Adjust square size for extra small screens */
+    height: 50vw;
+  }
+}
+
+/* General Controls Styling */
+.controls-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping if needed */
+  gap: 1rem; /* Space between items */
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Label and Select Container */
+.label-select-container {
+  display: flex; /* Keep items side by side */
+  align-items: center;
+  gap: 0.5rem; /* Space between label and dropdown */
+}
+
+/* Select Styling */
+.custom-select {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  width: auto; /* Default width for desktop and mobile */
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-select:focus {
+  border-color: #10b981; /* Green border on focus */
+  outline: none;
+}
+
+/* Label Styling */
+.custom-label {
+  font-size: 1rem;
+  text-align: right;
+  white-space: nowrap; /* Prevent label from wrapping */
+}
+
+.custom-title {
+  font-size: 1.5rem;
+  text-align: right;
+  font-weight: bolder;
+}
+
+/* Input Styling */
+.custom-input {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  text-align: center;
+  width: 50%; /* Default width for desktop and mobile */
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  border-color: #10b981; /* Green border on focus */
+  outline: none;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .controls-container {
+    flex-direction: column; /* Stack controls vertically */
+    align-items: center;
+  }
+
+  .custom-select,
+  .custom-input {
+    width: 60%; /* Full width for inputs and selects on mobile */
+    font-size: 1.2rem; /* Slightly larger text for readability */
+  }
+
+  .custom-label {
+    font-size: 1.2rem; /* Larger text for labels */
+    text-align: center;
+  }
+
+  .custom-title {
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  .label-select-container {
+    flex-direction: row; /* Keep label and dropdown side by side */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Optional: Adjust width as needed */
+  }
+}
